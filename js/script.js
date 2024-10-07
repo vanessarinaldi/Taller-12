@@ -60,6 +60,7 @@ document.getElementById("btnBuscar").addEventListener("click", function() {
     });
 });
 
+
 function getStars(vote_average) {
     const stars = Math.round(vote_average / 2); 
     let starHTML = '';
@@ -81,10 +82,10 @@ function showMovieDetails(movie) {
     movieDetails.innerHTML = `
         <h3>${movie.title}</h3>
         <p><strong>Overview:</strong> ${movie.overview}</p>
-        <p><strong>Genres:</strong> ${movie.genres.join(", ")}</p>
+        <p><strong>Genres:</strong> ${movie.genres.map(genre => genre.name).join(' - ')}</p>
         
         <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#movieInfo" aria-expanded="false" aria-controls="movieInfo">
-            Más Información
+            More
         </button>
         
         <div class="collapse" id="movieInfo">
