@@ -90,10 +90,10 @@ function showMovieDetails(movie) {
         
         <div class="collapse" id="movieInfo">
             <div class="card card-body mt-2">
-                <p><strong>Año:</strong> ${new Date(movie.release_date).getFullYear()}</p>
-                <p><strong>Duración:</strong> ${movie.runtime} minutos</p>
-                <p><strong>Presupuesto:</strong> $${movie.budget.toLocaleString()}</p>
-                <p><strong>Ganancias:</strong> $${movie.revenue.toLocaleString()}</p>
+                <p><strong>Year:</strong> ${new Date(movie.release_date).getFullYear()}</p>
+                <p><strong>Runtime:</strong> ${movie.runtime} mins</p>
+                <p><strong>Budget:</strong> $${movie.budget.toLocaleString()}</p>
+                <p><strong>Revenue:</strong> $${movie.revenue.toLocaleString()}</p>
             </div>
         </div>
     `;
