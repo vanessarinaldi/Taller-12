@@ -85,7 +85,7 @@ function showMovieDetails(movie) {
         <p><strong>Genres:</strong> ${movie.genres.map(genre => genre.name).join(' - ')}</p>
         
         <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#movieInfo" aria-expanded="false" aria-controls="movieInfo">
-            <strong>More<strong>
+            More
         </button>
         
         <div class="collapse" id="movieInfo">

@@ -26,7 +26,7 @@ main {
 .offcanvas-top{
     height: fit-content;
 }
-.btn-secondary  {
+.btn-secondary:active  {
     background-color:red;
     color: black;
 }
