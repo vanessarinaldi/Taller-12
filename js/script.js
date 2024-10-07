@@ -1,5 +1,6 @@
 const JAPFLIX_URL = "https://japceibal.github.io/japflix_api/movies-data.json";
 let moviesData = [];
+
 let getJSONData = function(url) {
     let result = {};
     return fetch(url)
@@ -22,7 +23,7 @@ let getJSONData = function(url) {
         });
 };
 
-window.onload = function () {
+window.onload = function() {
     getJSONData(JAPFLIX_URL).then(function(result) {
         if (result.status === 'ok') {
             moviesData = result.data;
@@ -32,7 +33,7 @@ window.onload = function () {
     });
 };
 
-document.getElementById("btnBuscar").addEventListener("click", function () {
+document.getElementById("btnBuscar").addEventListener("click", function() {
     let query = document.getElementById("inputBuscar").value.toLowerCase();
     let filteredMovies = moviesData.filter(movie => 
         movie.title.toLowerCase().includes(query) || 
@@ -47,22 +48,24 @@ document.getElementById("btnBuscar").addEventListener("click", function () {
     filteredMovies.forEach(movie => {
         let li = document.createElement("li");
         li.classList.add("list-group-item");
-      
+        
         li.innerHTML = `
             <strong>${movie.title}</strong> <br> ${movie.tagline} <br>
             ${getStars(movie.vote_average)}
         `;
+        
+        li.addEventListener("click", () => showMovieDetails(movie));
+        
         lista.appendChild(li);
     });
 });
-
 
 function getStars(vote_average) {
     const stars = Math.round(vote_average / 2); 
     let starHTML = '';
     for (let i = 0; i < 5; i++) {
         if (i < stars) {
-            starHTML += '<i class="fa fa-star" style="color: gold;"></i>';
+            starHTML += '<i class="fa fa-star" style="color: red;"></i>';
         } else {
             starHTML += '<i class="fa fa-star" style="color: gray;"></i>';
         }
@@ -71,3 +74,30 @@ function getStars(vote_average) {
 }
 
 
+function showMovieDetails(movie) {
+    const movieDetails = document.getElementById("movie-details");
+    
+    
+    movieDetails.innerHTML = `
+        <h3>${movie.title}</h3>
+        <p><strong>Overview:</strong> ${movie.overview}</p>
+        <p><strong>Genres:</strong> ${movie.genres.join(", ")}</p>
+        
+        <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#movieInfo" aria-expanded="false" aria-controls="movieInfo">
+            Más Información
+        </button>
+        
+        <div class="collapse" id="movieInfo">
+            <div class="card card-body mt-2">
+                <p><strong>Año:</strong> ${new Date(movie.release_date).getFullYear()}</p>
+                <p><strong>Duración:</strong> ${movie.runtime} minutos</p>
+                <p><strong>Presupuesto:</strong> $${movie.budget.toLocaleString()}</p>
+                <p><strong>Ganancias:</strong> $${movie.revenue.toLocaleString()}</p>
+            </div>
+        </div>
+    `;
+    
+   
+    const offcanvas = new bootstrap.Offcanvas(document.getElementById("offcanvasTop"));
+    offcanvas.show();
+}
